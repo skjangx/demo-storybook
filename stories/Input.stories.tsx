@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 
 const meta: Meta<typeof Input> = {
   title: 'shadcn/Input',
@@ -65,9 +66,7 @@ export const WithButton: Story = {
   render: () => (
     <div className="flex w-full max-w-sm items-center space-x-2">
       <Input type="email" placeholder="Email" />
-      <button className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
-        Subscribe
-      </button>
+      <Button>Subscribe</Button>
     </div>
   ),
 };
