@@ -1,3 +1,11 @@
+/**
+ * Button component stories showcasing all variants, sizes, and interactive patterns.
+ *
+ * The Button component is built on Radix UI primitives and provides consistent
+ * styling across different states and contexts. It supports multiple variants,
+ * sizes, and can be composed with other components like Tooltips and Dialogs.
+ */
+
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '@/components/ui/button';
 import {
@@ -48,6 +56,31 @@ const meta: Meta<typeof Button> = {
   component: Button,
   parameters: {
     layout: 'centered',
+    docs: {
+      description: {
+        component: `
+The Button component is a versatile interactive element built on Radix UI primitives.
+It provides consistent styling, accessibility features, and supports multiple variants
+and sizes for different use cases.
+
+## Features
+- **Accessibility**: Built-in keyboard navigation and screen reader support
+- **Variants**: Multiple visual styles (default, destructive, outline, secondary, ghost, link)
+- **Sizes**: Different size options (sm, default, lg, icon)
+- **Composable**: Works seamlessly with Tooltips, Dialogs, and DropdownMenus
+- **Interactive**: Supports disabled states and custom event handlers
+
+## Usage
+\`\`\`tsx
+import { Button } from '@/components/ui/button'
+
+<Button variant="default" size="default">
+  Click me
+</Button>
+\`\`\`
+        `,
+      },
+    },
   },
   tags: ['autodocs'],
   decorators: [
@@ -62,10 +95,39 @@ const meta: Meta<typeof Button> = {
     variant: {
       control: { type: 'select' },
       options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'],
+      description: 'The visual variant of the button',
+      table: { category: 'Appearance', defaultValue: { summary: 'default' } },
     },
     size: {
       control: { type: 'select' },
       options: ['default', 'sm', 'lg', 'icon'],
+      description: 'The size variant of the button',
+      table: { category: 'Appearance', defaultValue: { summary: 'default' } },
+    },
+    children: {
+      control: { type: 'text' },
+      description: 'The content to display inside the button',
+      table: { category: 'Content' },
+    },
+    disabled: {
+      control: { type: 'boolean' },
+      description: 'When true, the button is disabled and cannot be interacted with',
+      table: { category: 'State', defaultValue: { summary: 'false' } },
+    },
+    onClick: {
+      action: 'clicked',
+      description: 'Called when the button is clicked',
+      table: { category: 'Events' },
+    },
+    className: {
+      control: { type: 'text' },
+      description: 'Additional CSS classes to apply',
+      table: { category: 'Styling' },
+    },
+    asChild: {
+      control: { type: 'boolean' },
+      description: 'Change the default rendered element for the one passed as a child',
+      table: { category: 'Advanced', defaultValue: { summary: 'false' } },
     },
   },
 };
@@ -73,68 +135,166 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default button variant with standard styling
+ */
 export const Default: Story = {
   args: {
     children: 'Button',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default button style with primary action styling. Use for the most important actions in your interface.',
+      },
+    },
+  },
 };
 
+/**
+ * Secondary button variant for less prominent actions
+ */
 export const Secondary: Story = {
   args: {
     variant: 'secondary',
     children: 'Secondary',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Secondary styling for supporting actions that should be less prominent than primary actions. Use for actions like "Cancel" or "View Details".',
+      },
+    },
+  },
 };
 
+/**
+ * Destructive button variant for dangerous actions
+ */
 export const Destructive: Story = {
   args: {
     variant: 'destructive',
     children: 'Destructive',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Used for destructive actions like deleting content. Should be used sparingly and with confirmation dialogs for safety.',
+      },
+    },
+  },
 };
 
+/**
+ * Outline button variant for secondary actions with borders
+ */
 export const Outline: Story = {
   args: {
     variant: 'outline',
     children: 'Outline',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Outline buttons have a border but no background fill. Perfect for secondary actions that need more visual weight than ghost buttons.',
+      },
+    },
+  },
 };
 
+/**
+ * Ghost button variant for subtle actions
+ */
 export const Ghost: Story = {
   args: {
     variant: 'ghost',
     children: 'Ghost',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Ghost buttons have minimal visual styling and are perfect for subtle actions like navigation or toolbar buttons.',
+      },
+    },
+  },
 };
 
+/**
+ * Link button variant styled like a text link
+ */
 export const Link: Story = {
   args: {
     variant: 'link',
     children: 'Link',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Link buttons look like text links but maintain button behavior. Use when you need button functionality with link appearance.',
+      },
+    },
+  },
 };
 
+/**
+ * Small button size for compact interfaces
+ */
 export const Small: Story = {
   args: {
     size: 'sm',
     children: 'Small',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Small buttons are perfect for compact interfaces, toolbars, or when you need multiple actions in limited space.',
+      },
+    },
+  },
 };
 
+/**
+ * Large button size for prominent actions
+ */
 export const Large: Story = {
   args: {
     size: 'lg',
     children: 'Large',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Large buttons are ideal for prominent call-to-action buttons, especially on landing pages or when you need to draw attention.',
+      },
+    },
+  },
 };
 
+/**
+ * Disabled state prevents interaction and shows inactive styling
+ */
 export const Disabled: Story = {
   args: {
     disabled: true,
     children: 'Disabled',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: `Disabled buttons cannot be interacted with and show visual indication of their inactive state.
+
+**Accessibility Notes:**
+- Screen readers will announce the disabled state
+- Keyboard navigation will skip disabled buttons
+- Click events are prevented when disabled`,
+      },
+    },
+  },
 };
 
+/**
+ * Buttons integrated with Tooltips for enhanced UX
+ */
 export const WithTooltips: Story = {
   render: () => (
     <div className="flex gap-4 flex-wrap">
@@ -196,6 +356,9 @@ export const WithTooltips: Story = {
   ),
 };
 
+/**
+ * Buttons that trigger dropdown menus for complex actions
+ */
 export const WithDropdownMenu: Story = {
   render: () => (
     <div className="flex gap-4 flex-wrap">
@@ -273,6 +436,9 @@ export const WithDropdownMenu: Story = {
   ),
 };
 
+/**
+ * Buttons that open dialogs for confirmations and forms
+ */
 export const WithDialog: Story = {
   render: () => (
     <div className="flex gap-4 flex-wrap">
@@ -368,6 +534,9 @@ export const WithDialog: Story = {
   ),
 };
 
+/**
+ * Buttons with toast notifications for user feedback
+ */
 export const WithToastFeedback: Story = {
   render: () => (
     <div className="flex gap-4 flex-wrap">
@@ -428,6 +597,9 @@ export const WithToastFeedback: Story = {
   ),
 };
 
+/**
+ * Advanced button compositions combining multiple interaction patterns
+ */
 export const ComplexInteractions: Story = {
   render: () => (
     <div className="flex gap-4 flex-wrap">

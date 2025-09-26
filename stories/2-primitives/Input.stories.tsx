@@ -1,3 +1,11 @@
+/**
+ * Input component stories showcasing form inputs with validation and integration patterns.
+ *
+ * The Input component provides consistent text input styling and behavior across
+ * different contexts. It supports various input types, validation states, and
+ * integrates seamlessly with Labels, Buttons, and other form components.
+ */
+
 import type { Meta, StoryObj } from '@storybook/react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -50,6 +58,28 @@ const meta: Meta<typeof Input> = {
     type: {
       control: { type: 'select' },
       options: ['text', 'email', 'password', 'number', 'search', 'tel', 'url'],
+      description: 'The type of input field',
+      table: { category: 'Configuration', defaultValue: { summary: 'text' } },
+    },
+    placeholder: {
+      control: { type: 'text' },
+      description: 'Placeholder text to display when empty',
+      table: { category: 'Content' },
+    },
+    value: {
+      control: { type: 'text' },
+      description: 'The current value of the input',
+      table: { category: 'State' },
+    },
+    disabled: {
+      control: { type: 'boolean' },
+      description: 'When true, the input is disabled and cannot be interacted with',
+      table: { category: 'State', defaultValue: { summary: 'false' } },
+    },
+    className: {
+      control: { type: 'text' },
+      description: 'Additional CSS classes to apply',
+      table: { category: 'Styling' },
     },
   },
 };
