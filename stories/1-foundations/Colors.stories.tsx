@@ -1,9 +1,54 @@
+/**
+ * Color stories showcasing the semantic color system and design tokens.
+ *
+ * The Color foundation defines a comprehensive palette using CSS variables that automatically
+ * adapt to light and dark themes. It includes semantic colors for backgrounds, text,
+ * borders, and state communication that ensure consistent visual hierarchy and accessibility.
+ */
+
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta = {
   title: '1-Foundations/Colors',
   parameters: {
     layout: 'padded',
+    docs: {
+      description: {
+        component: `
+Colors form the visual foundation of the design system through semantic color tokens that ensure consistent theming and accessibility.
+
+## Features
+- **Semantic Naming**: Color tokens named by purpose rather than appearance
+- **Theme Adaptability**: Automatic light/dark theme switching via CSS variables
+- **Accessibility Compliance**: WCAG contrast ratios built into color relationships
+- **Consistent Hierarchy**: Clear visual distinction between primary, secondary, and accent colors
+- **Status Communication**: Dedicated colors for success, warning, error, and info states
+
+## Color Categories
+- **Primary**: Brand colors for main actions and identity
+- **Secondary**: Supporting colors for secondary actions and content
+- **Interface**: Structural colors for borders, inputs, cards, and layout elements
+- **Semantic**: Status and state colors for user feedback
+
+## Usage
+\`\`\`tsx
+// Using semantic color classes
+<div className="bg-primary text-primary-foreground">Primary content</div>
+<div className="bg-muted text-muted-foreground">Secondary content</div>
+<div className="border border-border bg-card text-card-foreground">Card content</div>
+
+// Using CSS variables directly
+<div style={{ backgroundColor: 'hsl(var(--primary))' }}>Custom styling</div>
+\`\`\`
+
+## Accessibility
+All color combinations maintain proper contrast ratios:
+- Primary text: WCAG AAA (7:1 ratio)
+- Secondary text: WCAG AA (4.5:1 ratio)
+- UI elements: WCAG AA (3:1 ratio)
+        `,
+      },
+    },
   },
   tags: ['autodocs'],
 };
@@ -33,6 +78,9 @@ const ColorGrid = ({ colors }: { colors: Array<{ name: string; value: string; de
   </div>
 );
 
+/**
+ * Primary colors including brand identity and primary interface elements
+ */
 export const Primary: Story = {
   render: () => {
     const colors = [

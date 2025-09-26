@@ -23,7 +23,7 @@ import { Toaster } from '@/components/ui/sonner';
 import {
   Copy,
   Scissors,
-  Paste,
+  Clipboard,
   Edit,
   Trash2,
   Share,
@@ -274,7 +274,7 @@ export const TextEditor: Story = {
             <ContextMenuShortcut>⌘X</ContextMenuShortcut>
           </ContextMenuItem>
           <ContextMenuItem onClick={() => toast.success("Pasted text")}>
-            <Paste className="h-4 w-4 mr-2" />
+            <Clipboard className="h-4 w-4 mr-2" />
             Paste
             <ContextMenuShortcut>⌘V</ContextMenuShortcut>
           </ContextMenuItem>

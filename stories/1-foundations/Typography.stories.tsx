@@ -1,9 +1,50 @@
+/**
+ * Typography stories showcasing text hierarchy, styling patterns, and semantic usage.
+ *
+ * The Typography foundation defines consistent text styling across the design system.
+ * It includes semantic heading hierarchy, body text variants, and specialized text
+ * styles that ensure readability and visual consistency throughout the application.
+ */
+
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta = {
   title: '1-Foundations/Typography',
   parameters: {
     layout: 'padded',
+    docs: {
+      description: {
+        component: `
+Typography forms the foundation of content hierarchy and readability in our design system.
+It provides a consistent set of text styles that scale appropriately across devices.
+
+## Features
+- **Semantic Hierarchy**: Proper heading levels (h1-h6) with consistent scaling
+- **Responsive Scaling**: Text sizes that adapt to different screen sizes
+- **Accessibility**: Proper contrast ratios and readable font sizes
+- **Performance**: Optimized font loading and rendering
+- **Consistency**: Unified spacing and line heights across all text styles
+
+## Usage
+\`\`\`tsx
+// Semantic headings
+<h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+  Main Title
+</h1>
+
+// Body text
+<p className="leading-7 [&:not(:first-child)]:mt-6">
+  Body content with proper spacing
+</p>
+
+// Muted text
+<p className="text-sm text-muted-foreground">
+  Secondary information
+</p>
+\`\`\`
+        `,
+      },
+    },
   },
   tags: ['autodocs'],
 };
@@ -29,8 +70,19 @@ const TypographyExample = ({
   </div>
 );
 
+/**
+ * Heading hierarchy demonstrating semantic HTML structure and visual hierarchy
+ */
 export const Headings: Story = {
   render: () => (
+    <div>
+      <div className="mb-6">
+        <h2 className="text-2xl font-semibold mb-2">Heading Hierarchy</h2>
+        <p className="text-muted-foreground">
+          Semantic heading structure (h1-h6) with consistent visual hierarchy.
+          Each heading level has appropriate font size, weight, and spacing.
+        </p>
+      </div>
     <div className="space-y-6">
       <div>
         <h3 className="text-lg font-semibold mb-3">Heading Styles</h3>
@@ -64,9 +116,13 @@ export const Headings: Story = {
         </TypographyExample>
       </div>
     </div>
+    </div>
   ),
 };
 
+/**
+ * Body text styles for content paragraphs and UI text elements
+ */
 export const BodyText: Story = {
   render: () => (
     <div className="space-y-6">
@@ -103,8 +159,18 @@ export const BodyText: Story = {
       </div>
     </div>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Body text styles for content paragraphs, lead text, large text, small text, and muted text. These variants provide appropriate hierarchy for different content types while maintaining readability.',
+      },
+    },
+  },
 };
 
+/**
+ * Inline text elements for emphasis, code snippets, links, and keyboard shortcuts
+ */
 export const InlineElements: Story = {
   render: () => (
     <div className="space-y-6">
@@ -141,8 +207,18 @@ export const InlineElements: Story = {
       </div>
     </div>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Inline text styling including bold emphasis, inline code, links, and keyboard shortcuts. These elements maintain proper contrast and readability while providing semantic meaning.',
+      },
+    },
+  },
 };
 
+/**
+ * List styling for both ordered and unordered lists with proper spacing
+ */
 export const Lists: Story = {
   render: () => (
     <div className="space-y-6">
@@ -173,8 +249,18 @@ export const Lists: Story = {
       </div>
     </div>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Properly styled ordered and unordered lists with consistent spacing and indentation. Lists maintain readability and proper semantic structure.',
+      },
+    },
+  },
 };
 
+/**
+ * Blockquote styling for emphasizing quotes and important content
+ */
 export const Blockquote: Story = {
   render: () => (
     <div className="space-y-6">
@@ -190,8 +276,18 @@ export const Blockquote: Story = {
       </blockquote>
     </div>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Blockquote styling with left border and italic text for emphasizing quotes, testimonials, or important excerpts.',
+      },
+    },
+  },
 };
 
+/**
+ * Font weight variations demonstrating the available weight options
+ */
 export const FontWeights: Story = {
   render: () => {
     const weights = [
@@ -231,8 +327,18 @@ export const FontWeights: Story = {
       </div>
     );
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Font weight scale from light to black, showing how different weights can create hierarchy and emphasis. Use heavier weights sparingly for maximum visual impact.',
+      },
+    },
+  },
 };
 
+/**
+ * Responsive typography demonstrating how text scales across different screen sizes
+ */
 export const ResponsiveTypography: Story = {
   render: () => (
     <div className="space-y-8">
@@ -292,8 +398,18 @@ export const ResponsiveTypography: Story = {
       </div>
     </div>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Typography that adapts across different screen sizes using Tailwind\'s responsive prefixes. Shows how text scales appropriately from mobile to desktop.',
+      },
+    },
+  },
 };
 
+/**
+ * Line height variations for different text contexts and readability needs
+ */
 export const LineHeight: Story = {
   render: () => {
     const lineHeights = [
@@ -333,8 +449,18 @@ export const LineHeight: Story = {
       </div>
     );
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Line height scale from tight to loose spacing. Affects readability and visual density - choose based on text size and layout constraints.',
+      },
+    },
+  },
 };
 
+/**
+ * Letter spacing (tracking) variations for different text styles and contexts
+ */
 export const LetterSpacing: Story = {
   render: () => {
     const spacings = [
@@ -371,8 +497,18 @@ export const LetterSpacing: Story = {
       </div>
     );
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Letter spacing affects text density and readability. Use wider spacing for uppercase text, labels, and decorative headings.',
+      },
+    },
+  },
 };
 
+/**
+ * Text utility classes for alignment, truncation, and text transformation
+ */
 export const TextUtilities: Story = {
   render: () => (
     <div className="space-y-8">
@@ -450,8 +586,18 @@ export const TextUtilities: Story = {
       </div>
     </div>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Common text utilities including alignment (left, center, right, justify), truncation (single line, multi-line clamping), and text transformation (uppercase, lowercase, capitalize).',
+      },
+    },
+  },
 };
 
+/**
+ * Complete typography showcase demonstrating the full design system in context
+ */
 export const AllTypography: Story = {
   render: () => (
     <div className="max-w-4xl space-y-8">
@@ -533,4 +679,11 @@ export const AllTypography: Story = {
       </div>
     </div>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Comprehensive showcase of the complete typography system including headings, body text, lists, inline elements, and utilities. Demonstrates how all typography elements work together in a real-world layout with accessibility guidelines.',
+      },
+    },
+  },
 };
