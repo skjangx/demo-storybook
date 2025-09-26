@@ -4,7 +4,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 
 const meta: Meta<typeof Textarea> = {
-  title: 'C-Form Components/Textarea',
+  title: '3-Form Components/Textarea',
   component: Textarea,
   parameters: {
     layout: 'centered',

@@ -19,7 +19,7 @@ import { User, Key, Settings as SettingsIcon, Bell, Download, Save, Eye, Shield,
 import { useState } from 'react';
 
 const meta: Meta<typeof Tabs> = {
-  title: 'F-Navigation/Tabs',
+  title: '6-Navigation/Tabs',
   component: Tabs,
   parameters: {
     layout: 'centered',

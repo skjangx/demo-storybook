@@ -50,7 +50,7 @@ import {
 } from 'lucide-react';
 
 const meta: Meta = {
-  title: 'A-Foundations/Icons',
+  title: '1-Foundations/Icons',
   parameters: {
     layout: 'padded',
   },

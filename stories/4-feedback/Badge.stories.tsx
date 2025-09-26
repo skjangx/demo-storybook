@@ -13,7 +13,7 @@ import { toast } from 'sonner';
 import { Toaster } from '@/components/ui/sonner';
 
 const meta: Meta<typeof Badge> = {
-  title: 'D-Feedback/Badge',
+  title: '4-Feedback/Badge',
   component: Badge,
   parameters: {
     layout: 'centered',

@@ -35,7 +35,7 @@ import { Save, Edit3, Trash2, Plus, AlertTriangle, User, Settings, HelpCircle, U
 import { useState } from 'react';
 
 const meta: Meta<typeof Dialog> = {
-  title: 'G-Overlay/Dialog',
+  title: '7-Overlay/Dialog',
   component: Dialog,
   parameters: {
     layout: 'centered',

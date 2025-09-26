@@ -25,7 +25,7 @@ const ToastDemo = ({ children }: { children: React.ReactNode }) => (
 );
 
 const meta: Meta = {
-  title: 'D-Feedback/Toast',
+  title: '4-Feedback/Toast',
   parameters: {
     layout: 'centered',
   },

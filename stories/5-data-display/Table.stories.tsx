@@ -40,7 +40,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { MoreHorizontal, Edit, Trash2, Eye, Copy, Mail, Phone, Download } from 'lucide-react';
 
 const meta: Meta<typeof Table> = {
-  title: 'E-Data Display/Table',
+  title: '5-Data Display/Table',
   component: Table,
   parameters: {
     layout: 'padded',

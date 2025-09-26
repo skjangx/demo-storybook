@@ -23,7 +23,7 @@ import { HelpCircle, Shield, Bell, Moon, Save } from 'lucide-react';
 import { useState } from 'react';
 
 const meta: Meta<typeof Switch> = {
-  title: 'C-Form Components/Switch',
+  title: '3-Form Components/Switch',
   component: Switch,
   parameters: {
     layout: 'centered',

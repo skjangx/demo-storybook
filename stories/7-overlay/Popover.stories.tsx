@@ -12,7 +12,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 
 const meta: Meta<typeof Popover> = {
-  title: 'G-Overlay/Popover',
+  title: '7-Overlay/Popover',
   component: Popover,
   parameters: {
     layout: 'centered',

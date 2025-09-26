@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta = {
-  title: 'A-Foundations/Grid',
+  title: '1-Foundations/Grid',
   parameters: {
     layout: 'fullscreen',
   },

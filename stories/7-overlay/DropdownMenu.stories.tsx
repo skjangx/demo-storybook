@@ -50,7 +50,7 @@ import {
 import { useState } from 'react';
 
 const meta: Meta<typeof DropdownMenu> = {
-  title: 'G-Overlay/DropdownMenu',
+  title: '7-Overlay/DropdownMenu',
   component: DropdownMenu,
   parameters: {
     layout: 'centered',

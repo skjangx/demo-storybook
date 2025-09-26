@@ -29,7 +29,7 @@ import { HelpCircle, Settings, User, Globe } from 'lucide-react';
 import { useState } from 'react';
 
 const meta: Meta<typeof Select> = {
-  title: 'C-Form Components/Select',
+  title: '3-Form Components/Select',
   component: Select,
   parameters: {
     layout: 'centered',

@@ -32,7 +32,7 @@ import { Eye, EyeOff, Check, X, HelpCircle, AlertCircle, Upload } from 'lucide-r
 import { useState } from 'react';
 
 const meta: Meta<typeof Input> = {
-  title: 'B-Primitives/Input',
+  title: '2-Primitives/Input',
   component: Input,
   parameters: {
     layout: 'centered',

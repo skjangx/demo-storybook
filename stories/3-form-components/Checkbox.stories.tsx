@@ -23,7 +23,7 @@ import { HelpCircle, CheckSquare, Save, Mail } from 'lucide-react';
 import { useState } from 'react';
 
 const meta: Meta<typeof Checkbox> = {
-  title: 'C-Form Components/Checkbox',
+  title: '3-Form Components/Checkbox',
   component: Checkbox,
   parameters: {
     layout: 'centered',

@@ -44,7 +44,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { MoreHorizontal, Heart, Share, Edit, Trash2, Eye, Calendar, Clock, Users } from 'lucide-react';
 
 const meta: Meta<typeof Card> = {
-  title: 'E-Data Display/Card',
+  title: '5-Data Display/Card',
   component: Card,
   parameters: {
     layout: 'centered',

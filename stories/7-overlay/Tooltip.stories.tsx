@@ -26,7 +26,7 @@ import {
 } from 'lucide-react';
 
 const meta: Meta<typeof Tooltip> = {
-  title: 'G-Overlay/Tooltip',
+  title: '7-Overlay/Tooltip',
   component: Tooltip,
   parameters: {
     layout: 'centered',

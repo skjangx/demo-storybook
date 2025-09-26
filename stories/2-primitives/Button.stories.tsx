@@ -44,7 +44,7 @@ import {
 } from 'lucide-react';
 
 const meta: Meta<typeof Button> = {
-  title: 'B-Primitives/Button',
+  title: '2-Primitives/Button',
   component: Button,
   parameters: {
     layout: 'centered',

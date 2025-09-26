@@ -26,7 +26,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { Mail, MessageSquare, UserPlus, MoreHorizontal, Phone, Calendar } from 'lucide-react';
 
 const meta: Meta<typeof Avatar> = {
-  title: 'E-Data Display/Avatar',
+  title: '5-Data Display/Avatar',
   component: Avatar,
   parameters: {
     layout: 'centered',

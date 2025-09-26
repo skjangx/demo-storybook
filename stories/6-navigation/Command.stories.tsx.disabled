@@ -1,0 +1,1057 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import {
+  Command,
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from '@/components/ui/command';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import {
+  Search,
+  Command as CommandIcon,
+  Home,
+  User,
+  Settings,
+  Bell,
+  Calendar,
+  Mail,
+  FileText,
+  Image,
+  Video,
+  Music,
+  Download,
+  Upload,
+  Trash2,
+  Edit,
+  Copy,
+  Share,
+  Archive,
+  Star,
+  Heart,
+  Bookmark,
+  Tag,
+  Folder,
+  Package,
+  ShoppingCart,
+  CreditCard,
+  Building,
+  MapPin,
+  Phone,
+  Globe,
+  Shield,
+  Lock,
+  Key,
+  Database,
+  Server,
+  Cloud,
+  Zap,
+  TrendingUp,
+  BarChart3,
+  PieChart,
+  Activity,
+  Users,
+  UserPlus,
+  UserMinus,
+  UserCheck,
+  MessageSquare,
+  MessageCircle,
+  Send,
+  Inbox,
+  Plus,
+  Minus,
+  X,
+  Check,
+  ArrowRight,
+  ArrowLeft,
+  ChevronRight,
+  ExternalLink,
+  Palette,
+  Brush,
+  Type,
+  Layout,
+  Grid,
+  Layers,
+  Move,
+  RotateCcw,
+  RefreshCw,
+  Filter,
+  SortAsc,
+  SortDesc,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+} from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { toast } from 'sonner';
+import { Toaster } from '@/components/ui/sonner';
+
+const meta: Meta<typeof Command> = {
+  title: '6-Navigation/Command',
+  component: Command,
+  parameters: {
+    layout: 'centered',
+    docs: {
+      description: {
+        component: `
+# Command Palette
+
+Powerful search and navigation component for quick access to actions, content, and settings.
+
+## Features
+
+- **Fast Search** - Fuzzy search through commands, files, and content
+- **Keyboard Shortcuts** - Full keyboard navigation with hotkeys
+- **Grouped Commands** - Organized sections for different types of actions
+- **Context Aware** - Dynamic commands based on current application state
+- **Extensible** - Easy to add custom command groups and actions
+- **Accessible** - Full ARIA support and screen reader friendly
+
+## Integration Patterns
+
+- **Button Triggers** - Launch with prominent search buttons
+- **Badge Indicators** - Show keyboard shortcuts and command types
+- **Avatar Integration** - User actions and profile commands
+- **Tooltip Guidance** - Helpful information for complex commands
+- **Card Layouts** - Organized command showcases and examples
+- **Toast Feedback** - Clear confirmation of command execution
+        `,
+      },
+    },
+  },
+  tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <TooltipProvider>
+        <div className="flex items-center justify-center min-h-[400px] w-full">
+          <Story />
+        </div>
+        <Toaster />
+      </TooltipProvider>
+    ),
+  ],
+};
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Basic: Story = {
+  render: () => (
+    <Card className="w-96">
+      <CardHeader>
+        <CardTitle>Basic Command Menu</CardTitle>
+        <CardDescription>
+          Simple command palette with grouped actions
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Command>
+          <CommandInput placeholder="Type a command or search..." />
+          <CommandList>
+            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandGroup heading="Suggestions">
+              <CommandItem>
+                <Calendar className="mr-2 h-4 w-4" />
+                <span>Calendar</span>
+              </CommandItem>
+              <CommandItem>
+                <User className="mr-2 h-4 w-4" />
+                <span>Profile</span>
+              </CommandItem>
+              <CommandItem>
+                <Settings className="mr-2 h-4 w-4" />
+                <span>Settings</span>
+              </CommandItem>
+            </CommandGroup>
+            <CommandSeparator />
+            <CommandGroup heading="Actions">
+              <CommandItem>
+                <Plus className="mr-2 h-4 w-4" />
+                <span>Create New</span>
+                <CommandShortcut>⌘N</CommandShortcut>
+              </CommandItem>
+              <CommandItem>
+                <Search className="mr-2 h-4 w-4" />
+                <span>Search</span>
+                <CommandShortcut>⌘F</CommandShortcut>
+              </CommandItem>
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </CardContent>
+    </Card>
+  ),
+};
+
+export const DialogCommand: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+      const down = (e: KeyboardEvent) => {
+        if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }
+      };
+
+      document.addEventListener('keydown', down);
+      return () => document.removeEventListener('keydown', down);
+    }, []);
+
+    return (
+      <>
+        <Card className="w-96">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <CommandIcon className="h-5 w-5" />
+              Command Dialog
+            </CardTitle>
+            <CardDescription>
+              Full-screen command palette with keyboard shortcut
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <Button
+              variant="outline"
+              className="w-full justify-start text-sm text-muted-foreground"
+              onClick={() => setOpen(true)}
+            >
+              <Search className="mr-2 h-4 w-4" />
+              Search commands...
+              <Badge variant="secondary" className="ml-auto text-xs">
+                ⌘K
+              </Badge>
+            </Button>
+
+            <div className="text-center text-xs text-muted-foreground">
+              Press{' '}
+              <Badge variant="outline" className="text-xs px-1">
+                ⌘K
+              </Badge>{' '}
+              to open command palette
+            </div>
+          </CardContent>
+        </Card>
+
+        <CommandDialog open={open} onOpenChange={setOpen}>
+          <CommandInput placeholder="Type a command or search..." />
+          <CommandList>
+            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandGroup heading="Quick Actions">
+              <CommandItem
+                onSelect={() => {
+                  toast.success('Creating new document...');
+                  setOpen(false);
+                }}
+              >
+                <FileText className="mr-2 h-4 w-4" />
+                <span>New Document</span>
+                <CommandShortcut>⌘N</CommandShortcut>
+              </CommandItem>
+              <CommandItem
+                onSelect={() => {
+                  toast.success('Opening search...');
+                  setOpen(false);
+                }}
+              >
+                <Search className="mr-2 h-4 w-4" />
+                <span>Search Files</span>
+                <CommandShortcut>⌘F</CommandShortcut>
+              </CommandItem>
+              <CommandItem
+                onSelect={() => {
+                  toast.success('Opening settings...');
+                  setOpen(false);
+                }}
+              >
+                <Settings className="mr-2 h-4 w-4" />
+                <span>Settings</span>
+                <CommandShortcut>⌘,</CommandShortcut>
+              </CommandItem>
+            </CommandGroup>
+
+            <CommandSeparator />
+
+            <CommandGroup heading="Navigation">
+              <CommandItem
+                onSelect={() => {
+                  toast.info('Navigating to Dashboard');
+                  setOpen(false);
+                }}
+              >
+                <Home className="mr-2 h-4 w-4" />
+                <span>Go to Dashboard</span>
+              </CommandItem>
+              <CommandItem
+                onSelect={() => {
+                  toast.info('Navigating to Profile');
+                  setOpen(false);
+                }}
+              >
+                <User className="mr-2 h-4 w-4" />
+                <span>Go to Profile</span>
+              </CommandItem>
+              <CommandItem
+                onSelect={() => {
+                  toast.info('Navigating to Calendar');
+                  setOpen(false);
+                }}
+              >
+                <Calendar className="mr-2 h-4 w-4" />
+                <span>Go to Calendar</span>
+              </CommandItem>
+            </CommandGroup>
+
+            <CommandSeparator />
+
+            <CommandGroup heading="Recent Files">
+              <CommandItem
+                onSelect={() => {
+                  toast.info('Opening Project Report.pdf');
+                  setOpen(false);
+                }}
+              >
+                <FileText className="mr-2 h-4 w-4" />
+                <span>Project Report.pdf</span>
+                <Badge variant="outline" className="ml-auto text-xs">
+                  2 days ago
+                </Badge>
+              </CommandItem>
+              <CommandItem
+                onSelect={() => {
+                  toast.info('Opening Design Assets.zip');
+                  setOpen(false);
+                }}
+              >
+                <Archive className="mr-2 h-4 w-4" />
+                <span>Design Assets.zip</span>
+                <Badge variant="outline" className="ml-auto text-xs">
+                  1 week ago
+                </Badge>
+              </CommandItem>
+            </CommandGroup>
+          </CommandList>
+        </CommandDialog>
+      </>
+    );
+  },
+};
+
+export const FileSearchCommand: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+
+    const files = [
+      {
+        name: 'Project Documentation.md',
+        type: 'document',
+        icon: FileText,
+        path: '/docs/project',
+        modified: '2 hours ago',
+        size: '24 KB',
+      },
+      {
+        name: 'Team Photo.jpg',
+        type: 'image',
+        icon: Image,
+        path: '/images/team',
+        modified: '1 day ago',
+        size: '2.1 MB',
+      },
+      {
+        name: 'Presentation.pptx',
+        type: 'document',
+        icon: FileText,
+        path: '/presentations',
+        modified: '3 days ago',
+        size: '8.5 MB',
+      },
+      {
+        name: 'Demo Video.mp4',
+        type: 'video',
+        icon: Video,
+        path: '/videos/demos',
+        modified: '1 week ago',
+        size: '156 MB',
+      },
+      {
+        name: 'Audio Notes.mp3',
+        type: 'audio',
+        icon: Music,
+        path: '/audio/notes',
+        modified: '2 weeks ago',
+        size: '15.2 MB',
+      },
+    ];
+
+    return (
+      <Card className="w-[600px]">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Search className="h-5 w-5" />
+            File Search Command
+          </CardTitle>
+          <CardDescription>
+            Search through files with detailed metadata and actions
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                className="w-full justify-start text-sm text-muted-foreground"
+              >
+                <Search className="mr-2 h-4 w-4" />
+                Search files and folders...
+                <Badge variant="secondary" className="ml-auto text-xs">
+                  ⌘P
+                </Badge>
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[600px] p-0" align="start">
+              <Command>
+                <CommandInput placeholder="Search files..." />
+                <CommandList>
+                  <CommandEmpty>No files found.</CommandEmpty>
+                  <CommandGroup heading="Recent Files">
+                    {files.map((file) => {
+                      const IconComponent = file.icon;
+                      return (
+                        <CommandItem
+                          key={file.name}
+                          className="flex items-center gap-3 p-3"
+                          onSelect={() => {
+                            toast.success(`Opening ${file.name}`);
+                            setOpen(false);
+                          }}
+                        >
+                          <IconComponent className="h-4 w-4 shrink-0 text-muted-foreground" />
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium text-sm truncate">
+                              {file.name}
+                            </div>
+                            <div className="text-xs text-muted-foreground truncate">
+                              {file.path} • {file.size} • {file.modified}
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Badge variant="outline" className="text-xs">
+                              {file.type}
+                            </Badge>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button variant="ghost" size="sm">
+                                  <Star className="h-3 w-3" />
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Add to favorites</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </div>
+                        </CommandItem>
+                      );
+                    })}
+                  </CommandGroup>
+
+                  <CommandSeparator />
+
+                  <CommandGroup heading="Quick Actions">
+                    <CommandItem
+                      onSelect={() => {
+                        toast.info('Creating new file...');
+                        setOpen(false);
+                      }}
+                    >
+                      <Plus className="mr-2 h-4 w-4" />
+                      <span>Create New File</span>
+                      <CommandShortcut>⌘N</CommandShortcut>
+                    </CommandItem>
+                    <CommandItem
+                      onSelect={() => {
+                        toast.info('Opening file browser...');
+                        setOpen(false);
+                      }}
+                    >
+                      <Folder className="mr-2 h-4 w-4" />
+                      <span>Browse Folders</span>
+                      <CommandShortcut>⌘O</CommandShortcut>
+                    </CommandItem>
+                    <CommandItem
+                      onSelect={() => {
+                        toast.info('Opening upload dialog...');
+                        setOpen(false);
+                      }}
+                    >
+                      <Upload className="mr-2 h-4 w-4" />
+                      <span>Upload Files</span>
+                      <CommandShortcut>⌘U</CommandShortcut>
+                    </CommandItem>
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
+
+          <div className="text-xs text-muted-foreground text-center">
+            Use ↑↓ to navigate, Enter to select, Esc to close
+          </div>
+        </CardContent>
+      </Card>
+    );
+  },
+};
+
+export const UserActionCommand: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+
+    const users = [
+      { id: 1, name: 'Sarah Johnson', email: 'sarah@example.com', role: 'Admin', status: 'active' },
+      { id: 2, name: 'Mike Chen', email: 'mike@example.com', role: 'Editor', status: 'active' },
+      { id: 3, name: 'Emily Davis', email: 'emily@example.com', role: 'Viewer', status: 'inactive' },
+      { id: 4, name: 'Alex Rodriguez', email: 'alex@example.com', role: 'Editor', status: 'pending' },
+    ];
+
+    const getStatusVariant = (status: string) => {
+      switch (status) {
+        case 'active': return 'default';
+        case 'inactive': return 'secondary';
+        case 'pending': return 'outline';
+        default: return 'secondary';
+      }
+    };
+
+    return (
+      <Card className="w-[500px]">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Users className="h-5 w-5" />
+            User Management Command
+          </CardTitle>
+          <CardDescription>
+            Quick actions for user management and administration
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                className="w-full justify-start text-sm text-muted-foreground"
+              >
+                <User className="mr-2 h-4 w-4" />
+                Search users and actions...
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[500px] p-0" align="start">
+              <Command>
+                <CommandInput placeholder="Search users or actions..." />
+                <CommandList>
+                  <CommandEmpty>No users found.</CommandEmpty>
+                  <CommandGroup heading="Quick Actions">
+                    <CommandItem
+                      onSelect={() => {
+                        toast.success('Creating new user...');
+                        setOpen(false);
+                      }}
+                    >
+                      <UserPlus className="mr-2 h-4 w-4" />
+                      <span>Add New User</span>
+                      <CommandShortcut>⌘U</CommandShortcut>
+                    </CommandItem>
+                    <CommandItem
+                      onSelect={() => {
+                        toast.info('Opening user import...');
+                        setOpen(false);
+                      }}
+                    >
+                      <Upload className="mr-2 h-4 w-4" />
+                      <span>Import Users</span>
+                    </CommandItem>
+                    <CommandItem
+                      onSelect={() => {
+                        toast.info('Exporting user list...');
+                        setOpen(false);
+                      }}
+                    >
+                      <Download className="mr-2 h-4 w-4" />
+                      <span>Export Users</span>
+                    </CommandItem>
+                  </CommandGroup>
+
+                  <CommandSeparator />
+
+                  <CommandGroup heading="Users">
+                    {users.map((user) => (
+                      <CommandItem
+                        key={user.id}
+                        className="flex items-center gap-3 p-3"
+                        onSelect={() => {
+                          toast.info(`Viewing ${user.name}'s profile`);
+                          setOpen(false);
+                        }}
+                      >
+                        <Avatar className="h-8 w-8">
+                          <AvatarFallback className="text-xs">
+                            {user.name.split(' ').map(n => n[0]).join('')}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1">
+                          <div className="font-medium text-sm">{user.name}</div>
+                          <div className="text-xs text-muted-foreground">
+                            {user.email} • {user.role}
+                          </div>
+                        </div>
+                        <Badge variant={getStatusVariant(user.status)} className="text-xs">
+                          {user.status}
+                        </Badge>
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+
+                  <CommandSeparator />
+
+                  <CommandGroup heading="Bulk Actions">
+                    <CommandItem
+                      onSelect={() => {
+                        toast.info('Sending bulk email...');
+                        setOpen(false);
+                      }}
+                    >
+                      <Mail className="mr-2 h-4 w-4" />
+                      <span>Send Bulk Email</span>
+                    </CommandItem>
+                    <CommandItem
+                      onSelect={() => {
+                        toast.info('Updating permissions...');
+                        setOpen(false);
+                      }}
+                    >
+                      <Shield className="mr-2 h-4 w-4" />
+                      <span>Update Permissions</span>
+                    </CommandItem>
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
+        </CardContent>
+      </Card>
+    );
+  },
+};
+
+export const AppCommand: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+
+    const apps = [
+      { name: 'Analytics Dashboard', icon: BarChart3, category: 'Analytics', description: 'View metrics and reports' },
+      { name: 'User Management', icon: Users, category: 'Admin', description: 'Manage users and permissions' },
+      { name: 'File Manager', icon: Folder, category: 'Tools', description: 'Browse and organize files' },
+      { name: 'Calendar', icon: Calendar, category: 'Productivity', description: 'Schedule and manage events' },
+      { name: 'Messages', icon: MessageSquare, category: 'Communication', description: 'Chat and messaging' },
+      { name: 'Settings', icon: Settings, category: 'System', description: 'Configure application settings' },
+    ];
+
+    const recentActivities = [
+      { action: 'Created new report', time: '2 minutes ago', icon: FileText },
+      { action: 'Updated user permissions', time: '1 hour ago', icon: UserCheck },
+      { action: 'Uploaded 5 files', time: '3 hours ago', icon: Upload },
+      { action: 'Sent team message', time: '1 day ago', icon: Send },
+    ];
+
+    return (
+      <Card className="w-[600px]">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Grid className="h-5 w-5" />
+            Application Command Center
+          </CardTitle>
+          <CardDescription>
+            Central hub for app navigation, recent activities, and quick actions
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                className="w-full justify-start text-sm text-muted-foreground"
+              >
+                <CommandIcon className="mr-2 h-4 w-4" />
+                Search apps, files, and actions...
+                <Badge variant="secondary" className="ml-auto text-xs">
+                  ⌘K
+                </Badge>
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[600px] p-0" align="start">
+              <Command>
+                <CommandInput placeholder="Type to search apps, files, or actions..." />
+                <CommandList className="max-h-96">
+                  <CommandEmpty>
+                    <div className="text-center py-8">
+                      <Search className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
+                      <p className="text-sm text-muted-foreground">No results found</p>
+                    </div>
+                  </CommandEmpty>
+
+                  <CommandGroup heading="Applications">
+                    {apps.map((app) => {
+                      const IconComponent = app.icon;
+                      return (
+                        <CommandItem
+                          key={app.name}
+                          className="flex items-center gap-3 p-3"
+                          onSelect={() => {
+                            toast.success(`Opening ${app.name}...`);
+                            setOpen(false);
+                          }}
+                        >
+                          <div className="w-8 h-8 rounded bg-primary/10 flex items-center justify-center">
+                            <IconComponent className="h-4 w-4 text-primary" />
+                          </div>
+                          <div className="flex-1">
+                            <div className="font-medium text-sm">{app.name}</div>
+                            <div className="text-xs text-muted-foreground">
+                              {app.description}
+                            </div>
+                          </div>
+                          <Badge variant="outline" className="text-xs">
+                            {app.category}
+                          </Badge>
+                        </CommandItem>
+                      );
+                    })}
+                  </CommandGroup>
+
+                  <CommandSeparator />
+
+                  <CommandGroup heading="Recent Activity">
+                    {recentActivities.map((activity, index) => {
+                      const IconComponent = activity.icon;
+                      return (
+                        <CommandItem
+                          key={index}
+                          className="flex items-center gap-3 p-3"
+                          onSelect={() => {
+                            toast.info(`Viewing: ${activity.action}`);
+                            setOpen(false);
+                          }}
+                        >
+                          <IconComponent className="h-4 w-4 text-muted-foreground" />
+                          <div className="flex-1">
+                            <div className="text-sm">{activity.action}</div>
+                            <div className="text-xs text-muted-foreground">
+                              {activity.time}
+                            </div>
+                          </div>
+                          <ArrowRight className="h-3 w-3 text-muted-foreground" />
+                        </CommandItem>
+                      );
+                    })}
+                  </CommandGroup>
+
+                  <CommandSeparator />
+
+                  <CommandGroup heading="Quick Actions">
+                    <CommandItem
+                      onSelect={() => {
+                        toast.success('Creating new project...');
+                        setOpen(false);
+                      }}
+                    >
+                      <Plus className="mr-2 h-4 w-4" />
+                      <span>Create New Project</span>
+                      <CommandShortcut>⌘N</CommandShortcut>
+                    </CommandItem>
+                    <CommandItem
+                      onSelect={() => {
+                        toast.info('Opening help center...');
+                        setOpen(false);
+                      }}
+                    >
+                      <MessageCircle className="mr-2 h-4 w-4" />
+                      <span>Help & Support</span>
+                      <CommandShortcut>⌘?</CommandShortcut>
+                    </CommandItem>
+                    <CommandItem
+                      onSelect={() => {
+                        toast.info('Opening feedback form...');
+                        setOpen(false);
+                      }}
+                    >
+                      <Heart className="mr-2 h-4 w-4" />
+                      <span>Send Feedback</span>
+                    </CommandItem>
+                  </CommandGroup>
+
+                  <CommandSeparator />
+
+                  <CommandGroup heading="System">
+                    <CommandItem
+                      onSelect={() => {
+                        toast.info('Opening preferences...');
+                        setOpen(false);
+                      }}
+                    >
+                      <Settings className="mr-2 h-4 w-4" />
+                      <span>Preferences</span>
+                      <CommandShortcut>⌘,</CommandShortcut>
+                    </CommandItem>
+                    <CommandItem
+                      onSelect={() => {
+                        toast.info('Checking for updates...');
+                        setOpen(false);
+                      }}
+                    >
+                      <RefreshCw className="mr-2 h-4 w-4" />
+                      <span>Check for Updates</span>
+                    </CommandItem>
+                    <CommandItem
+                      onSelect={() => {
+                        toast.success('Signing out...');
+                        setOpen(false);
+                      }}
+                    >
+                      <ArrowLeft className="mr-2 h-4 w-4" />
+                      <span>Sign Out</span>
+                    </CommandItem>
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
+
+          <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
+            <div className="flex items-center gap-1">
+              <Badge variant="outline" className="text-xs px-1">↑↓</Badge>
+              Navigate
+            </div>
+            <div className="flex items-center gap-1">
+              <Badge variant="outline" className="text-xs px-1">Enter</Badge>
+              Select
+            </div>
+            <div className="flex items-center gap-1">
+              <Badge variant="outline" className="text-xs px-1">Esc</Badge>
+              Close
+            </div>
+            <div className="flex items-center gap-1">
+              <Badge variant="outline" className="text-xs px-1">⌘K</Badge>
+              Open
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  },
+};
+
+export const EditorCommand: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+
+    const formatCommands = [
+      { name: 'Bold', shortcut: '⌘B', icon: Type, description: 'Make text bold' },
+      { name: 'Italic', shortcut: '⌘I', icon: Type, description: 'Make text italic' },
+      { name: 'Underline', shortcut: '⌘U', icon: Type, description: 'Underline text' },
+      { name: 'Code', shortcut: '⌘E', icon: Type, description: 'Format as code' },
+    ];
+
+    const alignCommands = [
+      { name: 'Align Left', shortcut: '⌘⇧L', icon: AlignLeft, description: 'Align text to left' },
+      { name: 'Align Center', shortcut: '⌘⇧C', icon: AlignCenter, description: 'Center text' },
+      { name: 'Align Right', shortcut: '⌘⇧R', icon: AlignRight, description: 'Align text to right' },
+    ];
+
+    const insertCommands = [
+      { name: 'Insert Link', shortcut: '⌘K', icon: ExternalLink, description: 'Add a hyperlink' },
+      { name: 'Insert Image', shortcut: '⌘⇧I', icon: Image, description: 'Add an image' },
+      { name: 'Insert Table', shortcut: '⌘⇧T', icon: Grid, description: 'Create a table' },
+      { name: 'Insert Code Block', shortcut: '⌘⇧C', icon: Type, description: 'Add code block' },
+    ];
+
+    return (
+      <Card className="w-[550px]">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Edit className="h-5 w-5" />
+            Editor Command Palette
+          </CardTitle>
+          <CardDescription>
+            Quick formatting and editing commands for rich text editor
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                className="w-full justify-start text-sm text-muted-foreground"
+              >
+                <Palette className="mr-2 h-4 w-4" />
+                Search formatting commands...
+                <Badge variant="secondary" className="ml-auto text-xs">
+                  ⌘/
+                </Badge>
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[550px] p-0" align="start">
+              <Command>
+                <CommandInput placeholder="Search formatting commands..." />
+                <CommandList>
+                  <CommandEmpty>No commands found.</CommandEmpty>
+
+                  <CommandGroup heading="Text Formatting">
+                    {formatCommands.map((command) => {
+                      const IconComponent = command.icon;
+                      return (
+                        <CommandItem
+                          key={command.name}
+                          onSelect={() => {
+                            toast.success(`Applied ${command.name} formatting`);
+                            setOpen(false);
+                          }}
+                        >
+                          <IconComponent className="mr-2 h-4 w-4" />
+                          <div className="flex-1">
+                            <span>{command.name}</span>
+                            <div className="text-xs text-muted-foreground">
+                              {command.description}
+                            </div>
+                          </div>
+                          <CommandShortcut>{command.shortcut}</CommandShortcut>
+                        </CommandItem>
+                      );
+                    })}
+                  </CommandGroup>
+
+                  <CommandSeparator />
+
+                  <CommandGroup heading="Text Alignment">
+                    {alignCommands.map((command) => {
+                      const IconComponent = command.icon;
+                      return (
+                        <CommandItem
+                          key={command.name}
+                          onSelect={() => {
+                            toast.success(`Applied ${command.name}`);
+                            setOpen(false);
+                          }}
+                        >
+                          <IconComponent className="mr-2 h-4 w-4" />
+                          <div className="flex-1">
+                            <span>{command.name}</span>
+                            <div className="text-xs text-muted-foreground">
+                              {command.description}
+                            </div>
+                          </div>
+                          <CommandShortcut>{command.shortcut}</CommandShortcut>
+                        </CommandItem>
+                      );
+                    })}
+                  </CommandGroup>
+
+                  <CommandSeparator />
+
+                  <CommandGroup heading="Insert Elements">
+                    {insertCommands.map((command) => {
+                      const IconComponent = command.icon;
+                      return (
+                        <CommandItem
+                          key={command.name}
+                          onSelect={() => {
+                            toast.success(`Inserting ${command.name.toLowerCase()}...`);
+                            setOpen(false);
+                          }}
+                        >
+                          <IconComponent className="mr-2 h-4 w-4" />
+                          <div className="flex-1">
+                            <span>{command.name}</span>
+                            <div className="text-xs text-muted-foreground">
+                              {command.description}
+                            </div>
+                          </div>
+                          <CommandShortcut>{command.shortcut}</CommandShortcut>
+                        </CommandItem>
+                      );
+                    })}
+                  </CommandGroup>
+
+                  <CommandSeparator />
+
+                  <CommandGroup heading="Document Actions">
+                    <CommandItem
+                      onSelect={() => {
+                        toast.success('Document saved');
+                        setOpen(false);
+                      }}
+                    >
+                      <Check className="mr-2 h-4 w-4" />
+                      <span>Save Document</span>
+                      <CommandShortcut>⌘S</CommandShortcut>
+                    </CommandItem>
+                    <CommandItem
+                      onSelect={() => {
+                        toast.info('Document exported');
+                        setOpen(false);
+                      }}
+                    >
+                      <Download className="mr-2 h-4 w-4" />
+                      <span>Export as PDF</span>
+                      <CommandShortcut>⌘⇧E</CommandShortcut>
+                    </CommandItem>
+                    <CommandItem
+                      onSelect={() => {
+                        toast.info('Sharing document...');
+                        setOpen(false);
+                      }}
+                    >
+                      <Share className="mr-2 h-4 w-4" />
+                      <span>Share Document</span>
+                      <CommandShortcut>⌘⇧S</CommandShortcut>
+                    </CommandItem>
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
+
+          <div className="text-xs text-muted-foreground space-y-1">
+            <p className="font-medium">Editor Shortcuts:</p>
+            <div className="grid grid-cols-2 gap-1">
+              <span>⌘B - Bold</span>
+              <span>⌘I - Italic</span>
+              <span>⌘U - Underline</span>
+              <span>⌘K - Link</span>
+              <span>⌘S - Save</span>
+              <span>⌘/ - Commands</span>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  },
+};

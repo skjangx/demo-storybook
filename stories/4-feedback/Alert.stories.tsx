@@ -22,7 +22,7 @@ import { Terminal, AlertCircle, CheckCircle, Info as InfoIcon, X, RefreshCw, Dow
 import { useState } from 'react';
 
 const meta: Meta<typeof Alert> = {
-  title: 'D-Feedback/Alert',
+  title: '4-Feedback/Alert',
   component: Alert,
   parameters: {
     layout: 'centered',

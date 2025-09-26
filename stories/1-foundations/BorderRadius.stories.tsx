@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta = {
-  title: 'A-Foundations/Border Radius',
+  title: '1-Foundations/Border Radius',
   parameters: {
     layout: 'padded',
   },
