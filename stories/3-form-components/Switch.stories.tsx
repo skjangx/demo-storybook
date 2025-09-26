@@ -1,6 +1,26 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+import { toast } from 'sonner';
+import { Toaster } from '@/components/ui/sonner';
+import { HelpCircle, Shield, Bell, Moon, Save } from 'lucide-react';
+import { useState } from 'react';
 
 const meta: Meta<typeof Switch> = {
   title: 'C-Form Components/Switch',
@@ -9,6 +29,14 @@ const meta: Meta<typeof Switch> = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <TooltipProvider>
+        <Story />
+        <Toaster />
+      </TooltipProvider>
+    ),
+  ],
   argTypes: {
     checked: {
       control: { type: 'boolean' },
@@ -64,20 +92,32 @@ export const DisabledChecked: Story = {
 
 export const Settings: Story = {
   render: () => (
-    <div className="space-y-6 max-w-md">
-      <div>
-        <h3 className="text-lg font-medium">Notifications</h3>
-        <p className="text-sm text-muted-foreground">
-          Manage your notification preferences.
-        </p>
-      </div>
-
-      <div className="space-y-4">
+    <Card className="w-full max-w-md">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Bell className="h-5 w-5" />
+          Notifications
+        </CardTitle>
+        <CardDescription>
+          Manage your notification preferences and stay informed.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
         <div className="flex items-center justify-between">
           <div className="space-y-0.5">
-            <Label htmlFor="email-notifications" className="font-medium">
-              Email notifications
-            </Label>
+            <div className="flex items-center gap-2">
+              <Label htmlFor="email-notifications" className="font-medium">
+                Email notifications
+              </Label>
+              <Tooltip>
+                <TooltipTrigger>
+                  <HelpCircle className="h-4 w-4 text-muted-foreground" />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Get notified about important account activities via email</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
             <p className="text-sm text-muted-foreground">
               Receive emails about your account activity.
             </p>
@@ -108,29 +148,50 @@ export const Settings: Story = {
           </div>
           <Switch id="sms-notifications" />
         </div>
-      </div>
-    </div>
+      </CardContent>
+      <CardFooter>
+        <Button
+          onClick={() => toast.success('Notification preferences saved!')}
+          className="w-full"
+        >
+          <Save className="mr-2 h-4 w-4" />
+          Save Preferences
+        </Button>
+      </CardFooter>
+    </Card>
   ),
 };
 
 export const Privacy: Story = {
   render: () => (
-    <div className="space-y-6 max-w-md">
-      <div>
-        <h3 className="text-lg font-medium">Privacy Settings</h3>
-        <p className="text-sm text-muted-foreground">
+    <Card className="w-full max-w-md">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Shield className="h-5 w-5" />
+          Privacy Settings
+        </CardTitle>
+        <CardDescription>
           Control your privacy and data preferences.
-        </p>
-      </div>
-
-      <div className="space-y-4">
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
         <div className="flex items-center justify-between">
           <div className="space-y-0.5">
-            <Label htmlFor="analytics" className="font-medium">
-              🔍 Analytics
-            </Label>
+            <div className="flex items-center gap-2">
+              <Label htmlFor="analytics" className="font-medium">
+                🔍 Analytics
+              </Label>
+              <Tooltip>
+                <TooltipTrigger>
+                  <HelpCircle className="h-4 w-4 text-muted-foreground" />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Help us improve by sharing anonymous usage data</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
             <p className="text-sm text-muted-foreground">
-              Help us improve by sharing anonymous usage data.
+              Share anonymous usage data to help us improve.
             </p>
           </div>
           <Switch id="analytics" defaultChecked />
@@ -171,22 +232,33 @@ export const Privacy: Story = {
           </div>
           <Switch id="two-factor" />
         </div>
-      </div>
-    </div>
+      </CardContent>
+      <CardFooter>
+        <Button
+          onClick={() => toast.success('Privacy settings updated!')}
+          className="w-full"
+        >
+          <Save className="mr-2 h-4 w-4" />
+          Save Privacy Settings
+        </Button>
+      </CardFooter>
+    </Card>
   ),
 };
 
 export const AppSettings: Story = {
   render: () => (
-    <div className="space-y-6 max-w-md">
-      <div>
-        <h3 className="text-lg font-medium">App Preferences</h3>
-        <p className="text-sm text-muted-foreground">
-          Customize your app experience.
-        </p>
-      </div>
-
-      <div className="space-y-4">
+    <Card className="w-full max-w-md">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Moon className="h-5 w-5" />
+          App Preferences
+        </CardTitle>
+        <CardDescription>
+          Customize your app experience and interface.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
         <div className="flex items-center justify-between">
           <div className="space-y-0.5">
             <Label htmlFor="dark-mode" className="font-medium">
@@ -201,9 +273,19 @@ export const AppSettings: Story = {
 
         <div className="flex items-center justify-between">
           <div className="space-y-0.5">
-            <Label htmlFor="auto-save" className="font-medium">
-              💾 Auto-save
-            </Label>
+            <div className="flex items-center gap-2">
+              <Label htmlFor="auto-save" className="font-medium">
+                💾 Auto-save
+              </Label>
+              <Tooltip>
+                <TooltipTrigger>
+                  <HelpCircle className="h-4 w-4 text-muted-foreground" />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Automatically save your work every few seconds</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
             <p className="text-sm text-muted-foreground">
               Automatically save your work as you type.
             </p>
@@ -222,7 +304,16 @@ export const AppSettings: Story = {
           </div>
           <Switch id="sound-effects" defaultChecked />
         </div>
-      </div>
-    </div>
+      </CardContent>
+      <CardFooter>
+        <Button
+          onClick={() => toast.success('App preferences saved!')}
+          className="w-full"
+        >
+          <Save className="mr-2 h-4 w-4" />
+          Save App Settings
+        </Button>
+      </CardFooter>
+    </Card>
   ),
 };
