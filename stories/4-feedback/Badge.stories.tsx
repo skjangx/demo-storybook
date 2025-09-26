@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Badge } from '@/components/ui/badge';
 
 const meta: Meta<typeof Badge> = {
-  title: 'shadcn/Badge',
+  title: 'D-Feedback/Badge',
   component: Badge,
   parameters: {
     layout: 'centered',

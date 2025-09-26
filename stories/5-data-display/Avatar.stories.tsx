@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const meta: Meta<typeof Avatar> = {
-  title: 'shadcn/Avatar',
+  title: 'E-Data Display/Avatar',
   component: Avatar,
   parameters: {
     layout: 'centered',

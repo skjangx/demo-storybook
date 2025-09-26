@@ -3,7 +3,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 
 const meta: Meta<typeof Checkbox> = {
-  title: 'shadcn/Checkbox',
+  title: 'C-Form Components/Checkbox',
   component: Checkbox,
   parameters: {
     layout: 'centered',

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '@/components/ui/button';
 
 const meta: Meta<typeof Button> = {
-  title: 'shadcn/Button',
+  title: 'B-Primitives/Button',
   component: Button,
   parameters: {
     layout: 'centered',

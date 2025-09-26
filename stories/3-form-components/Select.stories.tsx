@@ -9,7 +9,7 @@ import {
 import { Label } from '@/components/ui/label';
 
 const meta: Meta<typeof Select> = {
-  title: 'shadcn/Select',
+  title: 'C-Form Components/Select',
   component: Select,
   parameters: {
     layout: 'centered',

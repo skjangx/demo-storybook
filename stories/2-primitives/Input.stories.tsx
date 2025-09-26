@@ -4,7 +4,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 
 const meta: Meta<typeof Input> = {
-  title: 'shadcn/Input',
+  title: 'B-Primitives/Input',
   component: Input,
   parameters: {
     layout: 'centered',

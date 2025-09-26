@@ -3,7 +3,7 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 
 const meta: Meta<typeof Switch> = {
-  title: 'shadcn/Switch',
+  title: 'C-Form Components/Switch',
   component: Switch,
   parameters: {
     layout: 'centered',
